@@ -287,11 +287,21 @@
                                 <label for="major" class="form-label">Major</label>
                                 <select id="major" name="major" class="form-select" required>
                                     <option value="" disabled selected>Choose Your Degree</option>
-                                    <option value="BDSI">BDSI</option>
-                                    <option value="MLAIM">MLAIM</option>
-                                    <option value="WISD">WISD</option>
+                                    <option value="BDSI">Master BDSI</option>
+                                    <option value="MLAIM">Master MLAIM</option>
+                                    <option value="WISD">Master WISD</option>
+                                    <option value="WISD">Master MQL</option>
                                     <option value="ANOTHER_MASTER">Another Master</option>
-                                    <option value="BACHELOR">Bachelor</option>
+                                    <option value="BACHELOR_MIP">Bachelor (MIP)</option>
+                                    <option value="BACHELOR_BCG">Bachelor (BCG)</option>
+                                    <option value="BACHELOR_SMP">Bachelor (SMP)</option>
+                                    <option value="BACHELOR_SMC">Bachelor (SMC)</option>
+                                    <option value="BACHELOR_IA">Bachelor (INFORMATIQUE APPLIQUÉE)</option>
+                                    <option value="BACHELOR_SVI">Bachelor (SVI)</option>
+                                    <option value="BACHELOR_STU">Bachelor (STU)</option>
+                                    <option value="BACHELOR_SMA">Bachelor (SMA)</option>
+                                    <option value="BACHELOR_SMI">Bachelor (SMI)</option>
+                                    <option value="OTHER">Other</option>
                                 </select>
                             </div>
 
@@ -300,7 +310,7 @@
                                 <div>
                                     <label class="form-label" for="topics">Topics of Interest</label>
                                     <select name="topics_of_interest" id="topics" class="form-control choices-multiple1"
-                                            multiple="">
+                                            multiple="" required>
                                         <optgroup label="Sciences">
                                             <option value="It">It</option>
                                             <option value="Web Development">Web Development</option>
@@ -327,7 +337,7 @@
                             <div class="mb-3">
                                 <div>
                                     <label class="form-label" for="topics_cells">Cells of Interest</label>
-                                    <select name="cells_of_interest" id="topics_cells" class="form-control choices-multiple2" multiple="">
+                                    <select name="cells_of_interest" id="topics_cells" class="form-control choices-multiple2" multiple="" required>
                                         <option value="CP">CP CELL (Competitive Programming)</option>
                                         <option value="WEB">Web CELL</option>
                                         <option value="DATA">Data CELL</option>
