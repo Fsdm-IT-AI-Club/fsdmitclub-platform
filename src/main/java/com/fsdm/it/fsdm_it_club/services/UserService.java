@@ -48,4 +48,7 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(id);
     }
 
+    public Optional<User> loadUserByEmail(String adminEmail) {
+        return userRepository.findByEmailIgnoreCase(adminEmail);
+    }
 }

@@ -33,14 +33,16 @@ import org.thymeleaf.context.Context;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-import static com.fsdm.it.fsdm_it_club.helper.Constants.*;
+import static com.fsdm.it.fsdm_it_club.helper.Constants.CLUB_NAME;
+import static com.fsdm.it.fsdm_it_club.helper.Constants.MAIN_URL;
 
 @Service
 public class EmailService {
     private static final String JOIN_REQUEST_NOTIFE_TEMPLATE_NAME = "email/join_request/admin_notif";
     private static final String CONTTACT_NOTIFE_TEMPLATE_NAME = "email/contact/contact";
+    private static final String MESAGET_NOTIFE_TEMPLATE_NAME = "email/message";
     @Value("${spring.mail.username}")
-    private  String clubEmail;
+    private String clubEmail;
 
 
     private final TemplateEngine templateEngine;
@@ -61,10 +63,11 @@ public class EmailService {
         try {
             String body = templateEngine.process(JOIN_REQUEST_NOTIFE_TEMPLATE_NAME, context);
 
-            sendEmail(toUser.getEmail(), "New Join Request", body);
+            sendEmail(toUser.getEmail(), "New Join Request - "+ joinRequest.getFName(), body);
         } catch (Exception e) {
             System.out.println("Error occurred while sending email with template " + e.getMessage());
         }
+        sendThankYouEmail(joinRequest);
     }
 
     private static Context getJoinRequestContext(JoinRequest joinRequest, User toUser) {
@@ -74,6 +77,8 @@ public class EmailService {
                 "email", joinRequest.getEmail(),
                 "phone", joinRequest.getPhone(),
                 "degree", joinRequest.getDegree(),
+                "topicsOfInterest", joinRequest.getTopicsOfInterest(),
+                "cellsOfInterest", joinRequest.getCellsOfInterest(),
                 "major", joinRequest.getMajor(),
                 "message", joinRequest.getMessage(),
                 "adminDashboardUrl", MAIN_URL + "/admin/login"
@@ -124,5 +129,25 @@ public class EmailService {
         helper.setSubject(subject);
         helper.setText(body, true);
         emailSender.send(message);
+    }
+
+    public void sendThankYouEmail(JoinRequest joinRequest) {
+        if (joinRequest == null) {
+            System.err.println("JoinRequest object is null. Aborting email notification.");
+            return;
+        }
+
+        Context context = new Context();
+        context.setVariable("fName", joinRequest.getFName());
+    context.setVariable("message", "Thank you for your interest in joining the FSDM IT Club. Your request has been successfully registered. One of our team members will reach out to you for the next steps.");
+    //    context.setVariable("message", "ff");
+
+
+        try {
+            String body = templateEngine.process(MESAGET_NOTIFE_TEMPLATE_NAME, context);
+            sendEmail(joinRequest.getEmail(), "Join Request Received", body);
+        } catch (Exception e) {
+            System.out.println("Error occurred while sending thank you email: " + e.getMessage());
+        }
     }
 }

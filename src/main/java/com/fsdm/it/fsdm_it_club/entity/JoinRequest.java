@@ -16,6 +16,7 @@
 
 package com.fsdm.it.fsdm_it_club.entity;
 
+import com.fsdm.it.fsdm_it_club.converters.ListStringToStringConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Builder
@@ -41,6 +43,14 @@ public class JoinRequest {
     private String phone;
     @Column(nullable = false)
     private String email;
+
+    @Convert(converter = ListStringToStringConverter.class)
+    java.util.List<String> topicsOfInterest;
+    @Convert(converter = ListStringToStringConverter.class)
+    List<String> cellsOfInterest;
+
+
+
     @Column(nullable = false)
     private String degree;
 

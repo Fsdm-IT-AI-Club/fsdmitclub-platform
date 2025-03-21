@@ -76,7 +76,7 @@ public class SecurityConfig {
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/reset-password-request")).permitAll();
 
                             //admin
-                            authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin")).permitAll();
+                            authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin*")).permitAll();
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/login")).permitAll();
                             // resources
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/css/**")).permitAll();
@@ -92,6 +92,14 @@ public class SecurityConfig {
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/home/fonts/**")).permitAll();
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/home/scss/**")).permitAll();
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/home/chatbot/**")).permitAll();
+                            authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/home/toaster/**")).permitAll();
+                            authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/home/alert/**")).permitAll();
+
+
+
+                            authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/join-requests")).permitAll();
+
+
 
 
                             //authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).access("isAuthenticated() OR hasAuthority('read')")
@@ -104,25 +112,28 @@ public class SecurityConfig {
                 .formLogin(login -> {
                     login.loginPage("/login").permitAll().successHandler(new UrlAuthenticationSuccessHandler()).
                             failureHandler(new UrlAuthenticationFailureHandler());
-                }).sessionManagement(sessionManagement -> {
-                    // define the session management tto enable only one session per time
-                    sessionManagement.maximumSessions(1).maxSessionsPreventsLogin(false)
-                            .expiredUrl("/login?expired=true");
                 })
+//                .sessionManagement(sessionManagement -> {
+//                    // define the session management tto enable only one session per time
+//                    sessionManagement.maximumSessions(1).maxSessionsPreventsLogin(false)
+//                            .expiredUrl("/?expired=true");
+//                })
 
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutSuccessHandler(new UrlLogoutSuccessHandler())
                         .deleteCookies("JSESSIONID"))
-                .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
-                        {
-                            httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
-                                if (request.getRequestURI().contains("/admin")) {
-                                    response.sendRedirect("/admin/login");
-                                } else {
-                                    response.sendRedirect("/login");
-                                }
-                            });
-                        }
-                );
+//                .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
+//                        {
+//                            httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint((request, response, authException) -> {
+//                                // ge loginType from the request
+//                                if (request.getRequestURI().contains("/admin")) {
+//                                    response.sendRedirect("/admin/login");
+//                                } else {
+//                                    response.sendRedirect("/");
+//                                }
+//                            });
+//                        }
+//                )
+        ;
         return http.build();
     }
 

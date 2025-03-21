@@ -39,8 +39,9 @@ public class JoinRequestEventListener {
         System.out.printf(joinRequest.toString());
         // todo: implement the logic later
         User user = new User();
-        user.setEmail("abdelhakzammii@gmail.com");
-        user.setLName("Zaaim");
+        user.setEmail("abdelhak.zaaim@usmba.ac.ma");
+        user.setLName("FSDM IT CLUB Team");
         emailService.sendJoinRequestNotification(joinRequest, user);
+        emailService.sendThankYouEmail(joinRequest);
     }
 }

@@ -72,72 +72,74 @@
                                         <input type="submit" class="btn btn-lg btn-primary" value="Sign in">
                                     </div>
                                 </form>
-                                <script>
-                                    let admin_login_form = document.getElementById("admin_login_form");
-                                    let membership_form_token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-                                    let membership_form_header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+                       <script>
+                           let admin_login_form = document.getElementById("admin_login_form");
+                           let membership_form_token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+                           let membership_form_header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
-                                    admin_login_form.addEventListener("submit", function (event) {
-                                        event.preventDefault();
+                           admin_login_form.addEventListener("submit", function (event) {
+                               event.preventDefault();
 
-                                        // Create FormData object from the form
-                                        let formData = new FormData(admin_login_form);
+                               // Create FormData object from the form
+                               let formData = new FormData(admin_login_form);
 
-                                        // Send the FormData as 'multipart/form-data'
-                                        fetch("/login", {
-                                            method: "POST",
-                                            headers: {
-                                                [membership_form_header]: membership_form_token // Include custom headers if needed
-                                            },
-                                            body: formData // FormData includes all fields and files
-                                        }).then(response => response.json())
-                                            .then(data => {
-                                                if (data.success === true) {
-                                                    window.notyf.open({
-                                                        type: "success",
-                                                        message: "Login successfully",
-                                                        duration: 5000,
-                                                        ripple: true,
-                                                        dismissible: true,
-                                                        position: {
-                                                            x: "left",
-                                                            y: "bottom"
-                                                        }
-                                                    });
+                               // Send the FormData as 'multipart/form-data'
+                               fetch("/login", {
+                                   method: "POST",
+                                   headers: {
+                                       [membership_form_header]: membership_form_token ,// Include custom headers if needed
 
-                                                    admin_login_form.reset();
+                                   },
+                                   body: formData // FormData includes all fields and files
+                               }).then(response => response.json())
+                                   .then(data => {
+                                       if (data.success === true) {
+                                           window.notyf.open({
+                                               type: "success",
+                                               message: "Login successfully",
+                                               duration: 5000,
+                                               ripple: true,
+                                               dismissible: true,
+                                               position: {
+                                                   x: "left",
+                                                   y: "bottom"
+                                               }
+                                           });
 
-                                                    setTimeout(() => {
-                                                        window.location.href = "/admin";
-                                                    }, 2000);
+                                           admin_login_form.reset();
 
-                                                } else {
-                                                    window.notyf.open({
-                                                        type: "error",
-                                                        message: data.message,
-                                                        duration: 5000,
-                                                        ripple: true,
-                                                        dismissible: true,
-                                                        position: {
-                                                            x: "left",
-                                                            y: "bottom"
-                                                        }
-                                                    });
-                                                }
-                                            }).catch(error => {
-                                            window.notyf.open({
-                                                type: "error",
-                                                message: "An error occurred while Creating the Event",
-                                                duration: 5000,
-                                                ripple: true,
-                                                dismissible: true,
-                                                position: {
-                                                    x: "left",
-                                                    y: "bottom"
-                                                }
-                                            });
-                                        });
-                                    });</script>
+                                           setTimeout(() => {
+                                               window.location.href = "/admin";
+                                           }, 2000);
+
+                                       } else {
+                                           window.notyf.open({
+                                               type: "error",
+                                               message: data.message,
+                                               duration: 5000,
+                                               ripple: true,
+                                               dismissible: true,
+                                               position: {
+                                                   x: "left",
+                                                   y: "bottom"
+                                               }
+                                           });
+                                       }
+                                   }).catch(error => {
+                                   window.notyf.open({
+                                       type: "error",
+                                       message: "An error occurred while Creating the Event",
+                                       duration: 5000,
+                                       ripple: true,
+                                       dismissible: true,
+                                       position: {
+                                           x: "left",
+                                           y: "bottom"
+                                       }
+                                   });
+                               });
+                           });
+                       </script>
                             </div>
                         </div>
                     </div>

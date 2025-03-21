@@ -10,8 +10,8 @@
     <meta name="description"
           content="FSDM IT Club at Faculty of Sciences Dhar El Mahraz brings together students passionate about technology, offering workshops, events, and resources in programming, cybersecurity, data science, and software development.">
 
-
-    <title>FSDM IT CLUB | Events Listing</title>
+    <link class="js-stylesheet" href="/admin/css/light.css" rel="stylesheet">
+    <title>FSDM IT CLUB | Join Us</title>
     <link rel="canonical" href="https://fsdmitclub.com/join-us">
     <meta property="og:locale" content="en_Us">
 
@@ -80,7 +80,7 @@
         /* Section Background */
         .join-us-section {
             padding: 80px 0;
-            color: #ffffff; /* Default Text Color for Title and Description */
+
         }
 
         /* Section Title */
@@ -282,17 +282,67 @@
                                 </select>
                             </div>
 
+                            <!-- Major -->
                             <div class="form-group mb-4">
-                                <label for="email" class="form-label">Major</label>
-                                <input type="text" id="major" name="major" class="form-control"
-                                       placeholder="Your Major" required>
+                                <label for="major" class="form-label">Major</label>
+                                <select id="major" name="major" class="form-select" required>
+                                    <option value="" disabled selected>Choose Your Degree</option>
+                                    <option value="BDSI">BDSI</option>
+                                    <option value="MLAIM">MLAIM</option>
+                                    <option value="WISD">WISD</option>
+                                    <option value="ANOTHER_MASTER">Another Master</option>
+                                    <option value="BACHELOR">Bachelor</option>
+                                </select>
                             </div>
+
+
+                            <div class="mb-3">
+                                <div>
+                                    <label class="form-label" for="topics">Topics of Interest</label>
+                                    <select name="topics_of_interest" id="topics" class="form-control choices-multiple1"
+                                            multiple="">
+                                        <optgroup label="Sciences">
+                                            <option value="It">It</option>
+                                            <option value="Web Development">Web Development</option>
+
+                                            <option value="Security">Security</option>
+                                            <option value="AI">AI</option>
+                                            <option value="Technology">Technology</option>
+                                            <option value="IoT">IoT</option>
+
+                                            <option value="Robotics">Robotics</option>
+                                            <option value="Problem Solving">Problem Solving</option>
+                                            <option value="Mobile Development">Mobile Development</option>
+                                            <option value="DevOps">DevOps</option>
+                                            <option value="Networking">Networking</option>
+                                            <option value="Computer Vision">Computer Vision</option>
+                                            <option value="Data Sciences">Data Sciences</option>
+                                            <option value="Mathematics">Mathematics</option>
+                                        </optgroup>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div>
+                                    <label class="form-label" for="topics_cells">Cells of Interest</label>
+                                    <select name="cells_of_interest" id="topics_cells" class="form-control choices-multiple2" multiple="">
+                                        <option value="CP">CP CELL (Competitive Programming)</option>
+                                        <option value="WEB">Web CELL</option>
+                                        <option value="DATA">Data CELL</option>
+                                        <option value="IOT">IoT CELL</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
 
                             <!-- Message -->
                             <div class="form-group mb-4">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea id="message" name="message" class="form-control" rows="8"
-                                          placeholder="Let us know more about your request..." required></textarea>
+                                <label for="message" class="form-label">Message (Optional)</label>
+                                <textarea id="message" name="message" class="form-control" rows="16"
+                                          placeholder="Let us know more about your request..." ></textarea>
                             </div>
 
                             <!-- Submit Button -->
@@ -303,8 +353,10 @@
 
                         <script>
 
+
                             let membership_form = document.getElementById("membership_form");
                             document.querySelector('#membership_form').addEventListener('submit', (e) => {
+
                                 e.preventDefault();
                                 if (!membership_form.checkValidity()) {
                                     document.querySelector('.subscription').classList.add('error');
@@ -324,6 +376,10 @@
                                         fName: membership_form_data.get("fName"),
                                         email: membership_form_data.get("email"),
                                         phone: membership_form_data.get("phone"),
+
+                                        topicsOfInterest: membership_form_data.getAll("topics_of_interest"),
+                                        cellsOfInterest: membership_form_data.getAll("cells_of_interest"),
+
                                         degree: membership_form_data.get("degree"),
                                         major: membership_form_data.get("major"),
                                         message: membership_form_data.get("message"),
@@ -452,11 +508,11 @@
             <div class="col-lg-2 col-12 ms-auto">
                 <ul class="social-icon mt-lg-5 mt-3 mb-4">
                     <li class="social-icon-item">
-                        <a href="https://www.instagram.com/cs_club.fsk/" class="social-icon-link bi-instagram"></a>
+                        <a href="https://www.instagram.com/fsdm_it_club/" class="social-icon-link bi-instagram"></a>
                     </li>
 
                     <li class="social-icon-item">
-                        <a href="https://www.linkedin.com/company/cs-club-fsk/"
+                        <a href="https://www.linkedin.com/company/fsdm-it-ai-club/"
                            class="social-icon-link bi-linkedin"></a>
                     </li>
                 </ul>
@@ -496,6 +552,43 @@
         <span id="send-btn" class="material-symbols-rounded">send</span>
     </div>
 </div>
+
+
+<script src="/admin/js/app.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Choices.js
+
+        new Choices(document.querySelector(".choices-multiple1"));
+        new Choices(document.querySelector(".choices-multiple2"));
+        // Flatpickr
+        // flatpickr(".flatpickr-minimum");
+        // flatpickr(".flatpickr-datetime", {
+        //     enableTime: true,
+        //     dateFormat: "Y-m-d H:i",
+        // });
+        // flatpickr(".flatpickr-human", {
+        //     altInput: true,
+        //     altFormat: "F j, Y",
+        //     dateFormat: "Y-m-d",
+        // });
+        flatpickr(".flatpickr-multiple", {
+            mode: "multiple",
+            dateFormat: "Y-m-d"
+        });
+        // flatpickr(".flatpickr-range", {
+        //     mode: "range",
+        //     dateFormat: "Y-m-d"
+        // });
+        // flatpickr(".flatpickr-time", {
+        //     enableTime: true,
+        //     noCalendar: true,
+        //     dateFormat: "H:i",
+        // });
+    });
+</script>
+
+
 
 <!-- JAVASCRIPT FILES -->
 <script src="home/js/jquery.min.js"></script>

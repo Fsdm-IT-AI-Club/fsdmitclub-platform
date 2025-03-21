@@ -44,6 +44,8 @@ public class JoinRequestController {
                 .email(joinRequestDto.email())
                 .degree(joinRequestDto.degree())
                 .major(joinRequestDto.major())
+                .cellsOfInterest(joinRequestDto.cellsOfInterest())
+                .topicsOfInterest(joinRequestDto.topicsOfInterest())
                 .message(joinRequestDto.message())
                 .build();
 

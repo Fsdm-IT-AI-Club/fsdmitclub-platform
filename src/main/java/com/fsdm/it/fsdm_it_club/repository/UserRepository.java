@@ -25,4 +25,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     @AuthorizeReturnObject
     Optional<User> findByEmailIgnoreCase(String email);
+
+    boolean existsByEmailIgnoreCase(String adminEmail);
 }
