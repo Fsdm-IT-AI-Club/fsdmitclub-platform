@@ -17,7 +17,18 @@
 package com.fsdm.it.fsdm_it_club.repository;
 
 import com.fsdm.it.fsdm_it_club.entity.JoinRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface JoinRequestRepository extends JpaRepository<JoinRequest, Long> {
+    // search by name and email and phone with ignore case with pagination for one search field
+    Page<JoinRequest> findByfNameContainingIgnoreCaseOrderByIdAsc(String query, Pageable pageable);
+    Page<JoinRequest> findByfNameContainingIgnoreCaseOrderByIdDesc(String query, Pageable pageable);
+
+
+    Page<JoinRequest> findByfNameContainingIgnoreCaseOrderByFNameAsc(String query, Pageable pageable);
+    Page<JoinRequest> findByfNameContainingIgnoreCaseOrderByFNameDesc(String query, Pageable pageable);
 }

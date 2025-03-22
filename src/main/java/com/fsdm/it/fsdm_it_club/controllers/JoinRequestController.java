@@ -18,13 +18,23 @@ package com.fsdm.it.fsdm_it_club.controllers;
 
 
 import com.fsdm.it.fsdm_it_club.dto.request.JoinRequestDto;
+import com.fsdm.it.fsdm_it_club.dto.request.PaginateTableRequestDto;
+import com.fsdm.it.fsdm_it_club.dto.response.JoinRequestListItemResponseDto;
+import com.fsdm.it.fsdm_it_club.dto.response.JoinRequestsResponseDto;
 import com.fsdm.it.fsdm_it_club.dto.response.MessageResponseDto;
 import com.fsdm.it.fsdm_it_club.entity.JoinRequest;
 import com.fsdm.it.fsdm_it_club.services.JoinRequestService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @Validated
@@ -53,4 +63,6 @@ public class JoinRequestController {
 
         return MessageResponseDto.builder().message("Join request created successfully").success(true).build();
     }
+
+
 }

@@ -19,9 +19,15 @@ package com.fsdm.it.fsdm_it_club.services;
 
 import com.fsdm.it.fsdm_it_club.entity.JoinRequest;
 import com.fsdm.it.fsdm_it_club.events.JoinRequestCreatedEvent;
+import com.fsdm.it.fsdm_it_club.model.TableSortOrder;
+import com.fsdm.it.fsdm_it_club.model.enums.SortOrder;
 import com.fsdm.it.fsdm_it_club.repository.JoinRequestRepository;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class JoinRequestService {
@@ -52,5 +58,24 @@ public class JoinRequestService {
             joinRequest.setStatus(status);
             joinRequestRepository.save(joinRequest);
         }
+    }
+
+    public Page<JoinRequest> findByFNameContainingIgnoreCase(String query, List<TableSortOrder> order, Pageable pageable) {
+
+        if (order.isEmpty()) {
+            return joinRequestRepository.findByfNameContainingIgnoreCaseOrderByIdAsc(query, pageable);
+        }
+
+        TableSortOrder sortOrder = order.get(0);
+
+        SortOrder direction = sortOrder.dir();
+
+        if (direction == SortOrder.ASC) {
+            return joinRequestRepository.findByfNameContainingIgnoreCaseOrderByIdAsc(query, pageable);
+        } else {
+            return joinRequestRepository.findByfNameContainingIgnoreCaseOrderByIdDesc(query, pageable);
+        }
+
+
     }
 }
