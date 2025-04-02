@@ -16,6 +16,7 @@
 
 package com.fsdm.it.fsdm_it_club.config;
 
+import com.fsdm.it.fsdm_it_club.dto.response.MessageResponseDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,11 +32,24 @@ public class UrlAuthenticationFailureHandler implements AuthenticationFailureHan
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        String loginType = request.getParameter("loginType");
-        if ("admin".equals(loginType)) {
-            response.sendRedirect("/admin/login?error=true");
-        } else {
-            response.sendRedirect("/login?error=true");
-        }
+
+//        System.out.printf("Authentication failed: %s%n", exception.getMessage());
+//
+//
+//        String loginType = request.getParameter("loginType");
+//        if ("admin".equals(loginType)) {
+//            response.sendRedirect("/admin/login?error=true");
+//        } else {
+//            response.sendRedirect("/login?error=true");
+//        }
+
+       // return message dto
+        MessageResponseDto messageResponseDto = new MessageResponseDto("Authentication failed: " + exception.getMessage(),false);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        // add message and success response dto to response as json
+        response.getWriter().write("{\"message\": \"" + messageResponseDto.getMessage() + "\", \"success\": " + messageResponseDto.isSuccess() + "}");
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 }

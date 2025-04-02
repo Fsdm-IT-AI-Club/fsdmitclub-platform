@@ -16,6 +16,7 @@
 
 package com.fsdm.it.fsdm_it_club.config;
 
+import com.fsdm.it.fsdm_it_club.dto.response.MessageResponseDto;
 import com.fsdm.it.fsdm_it_club.entity.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,19 +32,28 @@ public class UrlAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        //Logic
-        var authaurities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
-        if(authaurities.contains(User.Role.MEMBER.name())) {
-            // redirect to memeber page
-            this.getRedirectStrategy().sendRedirect(request,response,request.getContextPath() + "/");
-        }else{
-            // redirect to dashboard  page depending on the role // index
-            //if user should see admin/index
+//        System.out.printf("Authentication successful: %s%n", authentication.getName());
+//        //Logic
+//        var authaurities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+//        if(authaurities.contains(User.Role.MEMBER.name())) {
+//            // redirect to memeber page
+//            this.getRedirectStrategy().sendRedirect(request,response,request.getContextPath() + "/");
+//        }else{
+//            // redirect to dashboard  page depending on the role // index
+//            //if user should see admin/index
+//
+//            this.getRedirectStrategy().sendRedirect(request,response,request.getContextPath() + "/admin");
+//        }
+//        //
+//        super.onAuthenticationSuccess(request, response, authentication);
+        MessageResponseDto messageResponseDto = new MessageResponseDto("Authentication successful: " + authentication.getName(), true);
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        // add message and success response dto to response as json
+        response.getWriter().write("{\"message\": \"" + messageResponseDto.getMessage() + "\", \"success\": " + messageResponseDto.isSuccess() + "}");
+        response.getWriter().flush();
+        response.getWriter().close();
 
-            this.getRedirectStrategy().sendRedirect(request,response,request.getContextPath() + "/admin");
-        }
-        //
-        super.onAuthenticationSuccess(request, response, authentication);
     }
 
 }

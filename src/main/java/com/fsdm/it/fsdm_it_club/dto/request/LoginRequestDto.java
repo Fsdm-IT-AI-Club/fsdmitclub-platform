@@ -16,5 +16,16 @@
 
 package com.fsdm.it.fsdm_it_club.dto.request;
 
-public record LoginRequestDto(String username, String password) {
+public record LoginRequestDto(String username, String password, String loginType, String rememberMe) {
+    public LoginRequestDto {
+        if (username == null || username.isBlank()) {
+            throw new IllegalArgumentException("Username cannot be null or empty");
+        }
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("Password cannot be null or empty");
+        }
+        if (loginType == null || loginType.isBlank()) {
+            throw new IllegalArgumentException("Login type cannot be null or empty");
+        }
+    }
 }

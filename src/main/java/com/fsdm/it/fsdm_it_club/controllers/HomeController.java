@@ -87,4 +87,10 @@ public class HomeController {
 
         return ResponseEntity.ok(MessageResponseDto.builder().message("Message sent").success(true).build());
     }
+
+    // test
+    @GetMapping("/login")
+    public String login() {
+        return "admin/sign-in";
+    }
 }

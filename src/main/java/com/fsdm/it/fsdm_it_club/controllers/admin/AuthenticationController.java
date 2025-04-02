@@ -48,7 +48,7 @@ public class AuthenticationController {
     private final SecurityContextRepository securityContextRepository =
             new HttpSessionSecurityContextRepository();
 
-    public AuthenticationController(@Qualifier("authenticationManagerAdmin") AuthenticationManager authenticationManager, Validator validator) {
+    public AuthenticationController(@Qualifier("authenticationManager") AuthenticationManager authenticationManager, Validator validator) {
         this.authenticationManager = authenticationManager;
         this.validator = validator;
     }

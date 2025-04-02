@@ -18,6 +18,7 @@ package com.fsdm.it.fsdm_it_club.entity;
 
 import com.fsdm.it.fsdm_it_club.converters.ListStringToStringConverter;
 import com.fsdm.it.fsdm_it_club.model.enums.Degree;
+import com.fsdm.it.fsdm_it_club.util.RoleAuthorityMapper;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +39,7 @@ import java.util.List;
 @Builder
 public class User implements UserDetails {
     protected final static String ROLE_PREFIX = "ROLE_";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -64,19 +66,19 @@ public class User implements UserDetails {
     @Convert(converter = ListStringToStringConverter.class)
     private List<String> passions;
 
-
     private String linkedin;
     private String github;
 
     private Degree degree;
-
 
     @Transient
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + this.getRole()));
-
+        for (User.Authority authority : RoleAuthorityMapper.getAuthorities(this.getRole())) {
+            authorities.add(new SimpleGrantedAuthority(authority.getAuthorityName()));
+        }
         return authorities;
     }
 
@@ -97,7 +99,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
@@ -119,8 +121,7 @@ public class User implements UserDetails {
         DESIGNER("Designer"),
         EVENT_MANAGER("Event Manager"),
         LEAD("Lead"),
-        MEMBER("Member"),
-        ;
+        MEMBER("Member");
 
         String roleName;
 
@@ -130,6 +131,23 @@ public class User implements UserDetails {
 
         public String getRoleName() {
             return roleName;
+        }
+
+    }
+
+    public enum Authority {
+        CREATE_EVENT,
+        DELETE_EVENT,
+        VIEW_MEMBERS,
+        VIEW_EVENTS,
+        VIEW_JOIN_REQUESTS,
+        VIEW_ADMIN,
+        VIEW_ADMIN_DASHBOARD,
+        VIEW_ADMIN_MEMBERS,
+        VIEW_ADMIN_EVENTS;
+
+        public String getAuthorityName() {
+            return this.name();
         }
 
     }

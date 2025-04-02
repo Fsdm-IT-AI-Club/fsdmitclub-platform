@@ -51,4 +51,7 @@ public class UserService implements UserDetailsService {
     public Optional<User> loadUserByEmail(String adminEmail) {
         return userRepository.findByEmailIgnoreCase(adminEmail);
     }
+
+
+
 }

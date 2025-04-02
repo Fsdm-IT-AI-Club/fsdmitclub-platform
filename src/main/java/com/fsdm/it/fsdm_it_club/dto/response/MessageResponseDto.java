@@ -22,8 +22,8 @@ import lombok.Data;
 @Builder
 @Data
 public class MessageResponseDto {
-    private String message;
-    private boolean success;
+    public String message;
+    public boolean success;
 
     public MessageResponseDto(String message, boolean success) {
         this.message = message;

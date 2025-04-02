@@ -19,6 +19,8 @@
             opacity: 0;
         }
     </style>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 
 
@@ -43,7 +45,7 @@
                                     <img src="/home/images/logo.png" alt="Jassa" class="img-fluid "
                                          width="132" height="132">
                                 </div>
-                                <form method="post" action="/login" id="admin_login_formm">
+                                <form method="post" action="/login" id="admin_login_form">
                                     <input type="hidden" th:name="${_csrf.headerName}" th:value="${_csrf.token}">
                                     <input type="hidden" name="loginType" value="admin">
                                     <div class="mb-3">
@@ -73,19 +75,19 @@
                                     </div>
                                 </form>
                        <script>
-                           let admin_login_form = document.getElementById("admin_login_form");
                            let membership_form_token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
                            let membership_form_header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
-                           admin_login_form.addEventListener("submit", function (event) {
-                               event.preventDefault();
 
+                           document.getElementById("admin_login_form").addEventListener("submit", function (event) {
+                               event.preventDefault();
                                // Create FormData object from the form
                                let formData = new FormData(admin_login_form);
 
                                // Send the FormData as 'multipart/form-data'
                                fetch("/login", {
                                    method: "POST",
+                                   contentType: 'application/x-www-form-urlencoded',
                                    headers: {
                                        [membership_form_header]: membership_form_token ,// Include custom headers if needed
 
@@ -109,6 +111,7 @@
                                            admin_login_form.reset();
 
                                            setTimeout(() => {
+
                                                window.location.href = "/admin";
                                            }, 2000);
 
