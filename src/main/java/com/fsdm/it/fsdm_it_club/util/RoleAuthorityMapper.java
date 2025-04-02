@@ -26,7 +26,7 @@ public class RoleAuthorityMapper {
     public static Set<User.Authority> getAuthorities(User.Role role) {
         switch (role) {
             case PRESIDENT:
-                return EnumSet.of(User.Authority.CREATE_EVENT, User.Authority.DELETE_EVENT, User.Authority.VIEW_MEMBERS, User.Authority.VIEW_ADMIN, User.Authority.VIEW_ADMIN_DASHBOARD, User.Authority.VIEW_ADMIN_MEMBERS, User.Authority.VIEW_ADMIN_EVENTS, User.Authority.VIEW_JOIN_REQUESTS, User.Authority.VIEW_EVENTS);
+                return EnumSet.of(User.Authority.CREATE_EVENT, User.Authority.DELETE_EVENT, User.Authority.VIEW_MEMBERS, User.Authority.VIEW_ADMIN, User.Authority.VIEW_ADMIN_DASHBOARD, User.Authority.VIEW_ADMIN_MEMBERS, User.Authority.VIEW_ADMIN_EVENTS, User.Authority.VIEW_JOIN_REQUESTS, User.Authority.VIEW_EVENTS, User.Authority.VIEW_SUBSCRIBED_EMAILS, User.Authority.EDITE_SUBSCRIBED_EMAILS);
             case VICE_PRESIDENT:
                 return EnumSet.of(User.Authority.CREATE_EVENT, User.Authority.VIEW_MEMBERS, User.Authority.VIEW_ADMIN, User.Authority.VIEW_ADMIN_DASHBOARD, User.Authority.VIEW_ADMIN_MEMBERS, User.Authority.VIEW_ADMIN_EVENTS);
             case SECRETARY:
