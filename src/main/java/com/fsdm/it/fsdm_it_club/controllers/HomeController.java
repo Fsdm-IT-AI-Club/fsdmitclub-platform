@@ -93,4 +93,9 @@ public class HomeController {
     public String login() {
         return "admin/sign-in";
     }
+
+    @GetMapping("/team")
+    public String team() {
+        return "home/team";
+    }
 }

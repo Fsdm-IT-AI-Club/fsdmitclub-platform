@@ -73,6 +73,7 @@ public class SecurityConfig {
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/event-details")).permitAll();
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/join-us")).permitAll();
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/login")).permitAll(); // Add this line
+                            authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/team")).permitAll();
 
 
                             authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll();

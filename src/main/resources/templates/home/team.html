@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/home/images/logo.png}" rel="icon">
+    <meta name="author" content="FSDM IT Club">
+    <meta name="keywords"
+          content="FSDM IT Club, Faculty of Sciences Dhar El Mahraz, Information Technology Club, IT student organization, Programming, Cybersecurity, Data Science, Networking, Software Development, Tech events, IT workshops, Student competitions, Innovation in technology, Fes Morocco, University IT club">
+    <meta name="description"
+          content="FSDM IT Club at Faculty of Sciences Dhar El Mahraz brings together students passionate about technology, offering workshops, events, and resources in programming, cybersecurity, data science, and software development.">
+
+    <link class="js-stylesheet" href="/admin/css/light.css" rel="stylesheet">
+    <title>FSDM IT CLUB | Join Us</title>
+    <link rel="canonical" href="https://fsdmitclub.com/join-us">
+    <meta property="og:locale" content="en_Us">
+
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+          rel="stylesheet">
+
+    <link th:href="@{home/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link th:href="@{home/css/bootstrap-icons.css}" rel="stylesheet">
+
+    <link th:href="@{home/css/templatemo-tiya-golf-club.css}" rel="stylesheet">
+
+
+    <link rel="stylesheet" th:href="@{home/chatbot/style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts Link For Icons -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"/>
+    <script th:src="@{home/chatbot/script.js}" defer></script>
+    <script th:src="@{home/js/requests.js}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="/home/toaster/toaster.css" rel="stylesheet">
+    <link href="/home/toaster/loading.css" rel="stylesheet">
+    <link href="/home/alert/snap-dialog.min.css" rel="stylesheet">
+    <script src="/home/alert/snap-dialog.min.js" defer></script>
+    <script src="/home/alert/script.js" defer></script>
+
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GST6DRN5FF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-GST6DRN5FF');
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Upcoming Events",
+            "description": "Join FSDM IT Club."
+        }
+    </script>
+
+<style>
+    @import url(//fonts.googleapis.com/css?family=Montserrat:300,500);
+    .team4 {
+        font-family: "Montserrat", sans-serif;
+        color: #8d97ad;
+        font-weight: 300;
+    }
+
+    .team4 h1, .team4 h2, .team4 h3, .team4 h4, .team4 h5, .team4 h6 {
+        color: #3e4555;
+    }
+
+    .team4 .font-weight-medium {
+        font-weight: 500;
+    }
+
+    .team4 h5 {
+        line-height: 22px;
+        font-size: 18px;
+    }
+
+    .team4 .subtitle {
+        color: #8d97ad;
+        line-height: 24px;
+        font-size: 16px;
+    }
+
+    .team4 ul li a {
+        color: #8d97ad;
+        padding-right: 15px;
+        -webkit-transition: 0.1s ease-in;
+        -o-transition: 0.1s ease-in;
+        transition: 0.1s ease-in;
+    }
+
+    .team4 ul li a:hover {
+        -webkit-transform: translate3d(0px, -5px, 0px);
+        transform: translate3d(0px, -5px, 0px);
+        color: #316ce8;
+    }
+</style>
+
+
+    <style>
+        /* Section Background */
+        .join-us-section {
+            padding: 80px 0;
+
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2.5rem;
+            color: #000000;
+            font-weight: 700;
+            margin-top: 40px;
+            text-transform: capitalize;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #717275;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* Form Card */
+        .form-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Elements */
+        .form-label {
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .form-control,
+        .form-select {
+            height: calc(2.5rem + 2px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #F2CC8F; /* Border color matching the theme */
+            outline: none;
+            box-shadow: 0 0 8px rgba(242, 204, 143, 0.4); /* Matching glow effect */
+        }
+
+        /* Submit Button */
+        .btn-gradient {
+            background:  rgb(49, 75, 157);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(242, 204, 143, 0.4);
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #5a67d8, rgb(49, 75, 157));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(242, 204, 143, 0.4);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-description {
+                font-size: 1rem;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+<main>
+
+    <nav class="navbar navbar-expand-lg" th:replace="home/partials/nav"></nav>
+
+    <div th:replace="home/partials/login" class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1"
+         id="loginSlideBar"
+         aria-labelledby="loginSlideBarLabel" style="padding-top: 0">
+    </div>
+
+
+    <section class="hero-section hero-50 d-flex justify-content-center align-items-center" id="section_1">
+
+        <div class="section-overlay"></div>
+
+        <svg viewBox="0 0 1962 178" xmlns="http://www.w3.org/2000/svg">
+            <path fill="rgb(49, 75, 157)" d="M 0 114 C 118.5 114 118.5 167 237 167 L 237 167 L 237 0 L 0 0 Z"
+                  stroke-width="0"></path>
+            <path fill="rgb(49, 75, 157)" d="M 236 167 C 373 167 373 128 510 128 L 510 128 L 510 0 L 236 0 Z"
+                  stroke-width="0"></path>
+            <path fill="rgb(49, 75, 157)" d="M 509 128 C 607 128 607 153 705 153 L 705 153 L 705 0 L 509 0 Z"
+                  stroke-width="0"></path>
+            <path fill="rgb(49, 75, 157)" d="M 704 153 C 812 153 812 113 920 113 L 920 113 L 920 0 L 704 0 Z"
+                  stroke-width="0"></path>
+            <path fill="rgb(49, 75, 157)" d="M 919 113 C 1048.5 113 1048.5 148 1178 148 L 1178 148 L 1178 0 L 919 0 Z"
+                  stroke-width="0"></path>
+            <path fill="rgb(49, 75, 157)" d="M 1177 148 C 1359.5 148 1359.5 129 1542 129 L 1542 129 L 1542 0 L 1177 0 Z"
+                  stroke-width="0"></path>
+            <path fill="rgb(49, 75, 157)" d="M 1541 129 C 1751.5 129 1751.5 138 1962 138 L 1962 138 L 1962 0 L 1541 0 Z"
+                  stroke-width="0"></path>
+        </svg>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-12">
+
+                    <h1 class="text-white mb-4 pb-2">Contact Our Team</h1>
+
+                    <a href="/#section_about" class="btn custom-btn smoothscroll me-3">About Us</a>
+                </div>
+
+            </div>
+        </div>
+
+        <svg viewBox="0 0 1962 178" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#ffffff" d="M 0 114 C 118.5 114 118.5 167 237 167 L 237 167 L 237 0 L 0 0 Z"
+                  stroke-width="0"></path>
+            <path fill="#ffffff" d="M 236 167 C 373 167 373 128 510 128 L 510 128 L 510 0 L 236 0 Z"
+                  stroke-width="0"></path>
+            <path fill="#ffffff" d="M 509 128 C 607 128 607 153 705 153 L 705 153 L 705 0 L 509 0 Z"
+                  stroke-width="0"></path>
+            <path fill="#ffffff" d="M 704 153 C 812 153 812 113 920 113 L 920 113 L 920 0 L 704 0 Z"
+                  stroke-width="0"></path>
+            <path fill="#ffffff" d="M 919 113 C 1048.5 113 1048.5 148 1178 148 L 1178 148 L 1178 0 L 919 0 Z"
+                  stroke-width="0"></path>
+            <path fill="#ffffff" d="M 1177 148 C 1359.5 148 1359.5 129 1542 129 L 1542 129 L 1542 0 L 1177 0 Z"
+                  stroke-width="0"></path>
+            <path fill="#ffffff" d="M 1541 129 C 1751.5 129 1751.5 138 1962 138 L 1962 138 L 1962 0 L 1541 0 Z"
+                  stroke-width="0"></path>
+        </svg>
+    </section>
+
+
+    <section class="join-us-section section-padding" id="join-us-section">
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <!-- Section Title -->
+                <div class="col-lg-8 col-md-10 col-12 text-center">
+                    <h2 class="section-title mb-4">Our Office Team</h2>
+                    <p class="section-description">Meet the dedicated team members of our club
+                </div>
+
+                <!-- Form Section -->
+                <div class="py-5 team4">
+                    <div class="container">
+
+                        <div class="row">
+                            <!-- column  -->
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/mohamed%20zaim.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Mohamed Zaim</h4>
+                                            <h5 class="subtitle mb-3">President</h5>
+                                            <p>Mohamed Zaim is responsible for overseeing all club activities and ensuring everything runs smoothly.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-email"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/nassima%20dhiba.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Nassima Dhiba</h4>
+                                            <h5 class="subtitle mb-3">Vice-President</h5>
+                                            <p>Nassima Dhiba assists the president and coordinates various club events and activities.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/wijdan.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Wijdane El Karami</h4>
+                                            <h5 class="subtitle mb-3">General Secretary</h5>
+                                            <p>Wijdane El Karami manages the club's administrative tasks, ensuring smooth communication and organization within the team.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/abdelhak%20zaaim.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Abdelhak Zaaim</h4>
+                                            <h5 class="subtitle mb-3">CP Lead</h5>
+                                            <p>Abdelhak Zaaim leads the Competitive Programming team, organizing training sessions and preparing members for competitions.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/anass%20Dabaghi.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Anass Dabaghi</h4>
+                                            <h5 class="subtitle mb-3">Web Lead</h5>
+                                            <p>Oussama Derouich leads the web development team, overseeing the creation and maintenance of the club's website and web applications.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/oussama%20derouich.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Oussama Derouich</h4>
+                                            <h5 class="subtitle mb-3">Web Lead</h5>
+                                            <p>Oussama Derouich leads the web development team, overseeing the creation and maintenance of the club's website and web applications.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/zakaria.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Zakaria Rouzak</h4>
+                                            <h5 class="subtitle mb-3">Data Lead</h5>
+                                            <p>Zakaria Rouzak leads the data science team, analyzing data and providing insights to support the club's activities and decision-making.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/otman%20hana.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Otmane Hana</h4>
+                                            <h5 class="subtitle mb-3">Data Lead</h5>
+                                            <p>Zakaria Rouzak leads the data science team, analyzing data and providing insights to support the club's activities and decision-making.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/youness%20ladraui.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Youness Ladraui</h4>
+                                            <h5 class="subtitle mb-3">Resource Manager</h5>
+                                            <p>Anass Ladraui manages the club's resources and ensures that all materials and equipment are available for events and activities.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/aicha.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Aicha Doua</h4>
+                                            <h5 class="subtitle mb-3">Event Manager</h5>
+                                            <p>Aicha Doua coordinates and manages all club events, ensuring they run smoothly and successfully.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/houssam.jpeg" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Houssam Tachnout</h4>
+                                            <h5 class="subtitle mb-3">Media Manager</h5>
+                                            <p>Houssam Tachnout coordinates and manages all club events, ensuring they run smoothly and successfully.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+
+                            <div class="col-lg-3 mb-4">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="/home/images/members/2025-2026/youssef%20ayoujil.JPG" alt="wrapkit" class="img-fluid rounded-circle" loading="lazy"/>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="pt-2">
+                                            <h4 class="mt-4 font-weight-medium mb-0">Youssef Ayoujil</h4>
+                                            <h5 class="subtitle mb-3">Designer</h5>
+                                            <p>Youssef Ayoujil is responsible for creating visual content and designs for the club's events and promotional materials.</p>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#" class="text-decoration-none d-block px-1"><i class="icon-social-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section section-padding" id="section_about_us">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-5 col-12">
+                    <form action="/contact" method="post" class="custom-form contact-form" role="form" id="contact_form">
+                        <h2 class="mb-4 pb-2">Contact Us</h2>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-floating">
+                                    <input type="text" name="fName" id="full-name" class="form-control" placeholder="Full Name" required="">
+
+                                    <label for="floatingInput">Full Name</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-floating">
+                                    <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required="">
+
+                                    <label for="floatingInput">Email address</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="message" name="message" placeholder="Describe message here" required=""></textarea>
+
+                                    <label for="floatingTextarea">Message</label>
+                                </div>
+
+                                <button type="submit" class="form-control">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-lg-6 col-12">
+                    <div class="contact-info mt-5">
+                        <div class="contact-info-item">
+                            <div class="contact-info-body">
+                                <strong>Faculty of Sciences Dhar El Mahraz</strong>
+
+                                <p class="mb-0">
+                                    <a href="mailto:contact@fsdmitclub.com" class="contact-link">
+                                        contact@fsdmitclub.com
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="contact-info-footer">
+                                <a href="#">Directions</a>
+                            </div>
+                        </div>
+
+                        <img src="home/images/WorldMap.svg" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-12 me-auto mb-5 mb-lg-0">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="home/images/logo.png" class="navbar-brand-image" alt="">
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-12">
+                <h5 class="site-footer-title mb-4">Join Us</h5>
+
+                <p class="d-flex border-bottom pb-3 mb-3 me-lg-3">
+                    <span>Mon-Fri</span>
+                    6:00 AM - 6:00 PM
+                </p>
+
+                <p class="d-flex me-lg-3">
+                    <span>Sat-Sun</span>
+                    6:30 AM - 8:30 PM
+                </p>
+                <br>
+                <p class="copyright-text">Copyright © 2024 FSDM IT Club FSDM</p>
+            </div>
+
+            <div class="col-lg-2 col-12 ms-auto">
+                <ul class="social-icon mt-lg-5 mt-3 mb-4">
+                    <li class="social-icon-item">
+                        <a href="https://www.instagram.com/fsdm_it_club/" class="social-icon-link bi-instagram"></a>
+                    </li>
+
+                    <li class="social-icon-item">
+                        <a href="https://www.linkedin.com/company/fsdm-it-ai-club/"
+                           class="social-icon-link bi-linkedin"></a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#007097" fill-opacity="0.7"
+              d="M0,224L34.3,192C68.6,160,137,96,206,90.7C274.3,85,343,139,411,144C480,149,549,107,617,122.7C685.7,139,754,213,823,240C891.4,267,960,245,1029,224C1097.1,203,1166,181,1234,160C1302.9,139,1371,117,1406,106.7L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
+    </svg>
+    <div id="loader_container" style="display: none">
+        <div class="loader"></div>
+    </div>
+</footer>
+
+
+<button class="chatbot-toggler">
+    <span class="material-symbols-rounded">mode_comment</span>
+    <span class="material-symbols-outlined">close</span>
+</button>
+<div class="chatbot">
+    <header>
+        <h2>FSDM IT Club</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <span class="material-symbols-outlined">smart_toy</span>
+            <p>Hi there <br>How can I help you today?</p>
+        </li>
+    </ul>
+    <div class="chat-input">
+        <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+        <span id="send-btn" class="material-symbols-rounded">send</span>
+    </div>
+</div>
+
+
+<script src="/admin/js/app.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Choices.js
+
+        new Choices(document.querySelector(".choices-multiple1"));
+        new Choices(document.querySelector(".choices-multiple2"));
+        // Flatpickr
+        // flatpickr(".flatpickr-minimum");
+        // flatpickr(".flatpickr-datetime", {
+        //     enableTime: true,
+        //     dateFormat: "Y-m-d H:i",
+        // });
+        // flatpickr(".flatpickr-human", {
+        //     altInput: true,
+        //     altFormat: "F j, Y",
+        //     dateFormat: "Y-m-d",
+        // });
+        flatpickr(".flatpickr-multiple", {
+            mode: "multiple",
+            dateFormat: "Y-m-d"
+        });
+        // flatpickr(".flatpickr-range", {
+        //     mode: "range",
+        //     dateFormat: "Y-m-d"
+        // });
+        // flatpickr(".flatpickr-time", {
+        //     enableTime: true,
+        //     noCalendar: true,
+        //     dateFormat: "H:i",
+        // });
+    });
+</script>
+
+
+
+<!-- JAVASCRIPT FILES -->
+<script src="home/js/jquery.min.js"></script>
+<script src="home/js/bootstrap.bundle.min.js"></script>
+<script src="home/js/jquery.sticky.js"></script>
+<script src="home/js/click-scroll.js"></script>
+<script src="home/js/animated-headline.js"></script>
+<script src="home/js/modernizr.js"></script>
+<script src="home/js/custom.js"></script>
+
+<script src="/home/toaster/toast.js"></script>
+<script src="/home/toaster/loading.js"></script>
+</body>
+</html>
