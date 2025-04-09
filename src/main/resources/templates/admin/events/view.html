@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/partials/head :: head(title = 'Dashboard | View Event')"></head>
+
+
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
+<div class="wrapper">
+    <nav th:replace="admin/partials/sidebar :: sidebar(href='/admin/events/')"></nav>
+
+    <div class="main">
+        <nav th:replace="admin/partials/navbar"></nav>
+
+        <main class="content">
+            <div class="container-fluid p-0">
+
+                <div class="mb-3">
+                    <h1 class="h3 d-inline align-middle">View Event</h1></a>
+                </div>
+
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+
+                                <h6 class="card-subtitle text-muted">Event Details.</h6>
+                            </div>
+                            <div class="card-body">
+
+
+                                <div class="container mt-5">
+                                    <form>
+                                        <div class="row">
+                                            <div class="mb-12 col-md-6">
+                                                <label class="form-label" for="title_form">Title</label>
+                                                <input type="text" class="form-control" id="title_form" name="title"
+                                                       th:value="${event.title}" placeholder="" disabled>
+                                            </div>
+                                            <div class="mb-12 col-md-6">
+                                                <label class="form-label">Date Interval</label>
+                                                <input type="text" name="dateInterval"
+                                                       class="form-control flatpickr-range flatpickr-input active"
+                                                       placeholder="Select date.." readonly="readonly"
+                                                       th:value="${formattedDateInterval}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="mb-12 col-md-6">
+                                                <label class="form-label">From</label>
+                                                <input type="text" name="timeFrom"
+                                                       class="form-control flatpickr-time flatpickr-input"
+                                                       placeholder="Select date.." readonly="readonly"
+                                                       th:value="${formattedStartTime}" disabled>
+                                            </div>
+                                            <div class="mb-12 col-md-6">
+                                                <label class="form-label">To</label>
+                                                <input type="text" name="timeTo"
+                                                       class="form-control flatpickr-time flatpickr-input"
+                                                       placeholder="Select date.." readonly="readonly"
+                                                       th:value="${formattedEndTime}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label" for="description_form">Description</label>
+                                            <textarea class="form-control" name="description" id="description_form"
+                                                      rows="4"
+                                                      th:value="${event.description}" th:text="${event.description}"
+                                                      placeholder="" disabled></textarea>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label" for="topics">Topics</label>
+                                            <select name="topics" id="topics" class="form-control choices-multiple"
+                                                    multiple disabled>
+                                                <optgroup label="Sciences">
+                                                    <option value="It" th:selected="${event.topics.contains('It')}">It
+                                                    </option>
+                                                    <option value="Web Development"
+                                                            th:selected="${event.topics.contains('Web Development')}">
+                                                        Web Development
+                                                    </option>
+                                                    <option value="Security"
+                                                            th:selected="${event.topics.contains('Security')}">Security
+                                                    </option>
+                                                    <option value="AI" th:selected="${event.topics.contains('AI')}">AI
+                                                    </option>
+                                                    <option value="Technology"
+                                                            th:selected="${event.topics.contains('Technology')}">
+                                                        Technology
+                                                    </option>
+                                                    <option value="IoT" th:selected="${event.topics.contains('IoT')}">
+                                                        IoT
+                                                    </option>
+                                                    <option value="Robotics"
+                                                            th:selected="${event.topics.contains('Robotics')}">Robotics
+                                                    </option>
+                                                    <option value="Problem Solving"
+                                                            th:selected="${event.topics.contains('Problem Solving')}">
+                                                        Problem Solving
+                                                    </option>
+                                                    <option value="Mobile Development"
+                                                            th:selected="${event.topics.contains('Mobile Development')}">
+                                                        Mobile Development
+                                                    </option>
+                                                    <option value="DevOps"
+                                                            th:selected="${event.topics.contains('DevOps')}">DevOps
+                                                    </option>
+                                                    <option value="Networking"
+                                                            th:selected="${event.topics.contains('Networking')}">
+                                                        Networking
+                                                    </option>
+                                                    <option value="Computer Vision"
+                                                            th:selected="${event.topics.contains('Computer Vision')}">
+                                                        Computer Vision
+                                                    </option>
+                                                    <option value="Data Sciences"
+                                                            th:selected="${event.topics.contains('Data Sciences')}">Data
+                                                        Sciences
+                                                    </option>
+                                                    <option value="Mathematics"
+                                                            th:selected="${event.topics.contains('Mathematics')}">
+                                                        Mathematics
+                                                    </option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label" for="type">Type</label>
+                                            <select class="form-control choices-single" name="type" id="type" disabled>
+                                                <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                    <option th:each="eventType : ${eventTypes}" th:value="${eventType}"
+                                                            th:text="${#strings.capitalize(#strings.toLowerCase(eventType))}"
+                                                            th:selected="${eventType == event.type}"></option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="isOnline"
+                                                   id="isOnline" th:checked="${event.isOnline}" disabled>
+                                            <label class="form-check-label" for="isOnline">Online Event</label>
+                                        </div>
+
+                                        <div id="addressField" th:if="${!event.isOnline}">
+                                            <label class="form-label" for="inputAddress">Location</label>
+                                            <input name="location" type="text" class="form-control" id="inputAddress"
+                                                   th:value="${event.location}" placeholder="Dhar El Mahrez ...."
+                                                   disabled>
+                                        </div>
+
+                                        <div class="row hide" id="onlineLinkField" th:if="${event.isOnline}">
+                                            <div class="mb-12 col-md-6">
+                                                <label class="form-label">Where</label>
+                                                <select name="onlinePlatform" class="form-select" disabled>
+                                                    <option value="google_meet"
+                                                            th:selected="${event.onlinePlatform == 'google_meet'}">
+                                                        Google Meet
+                                                    </option>
+                                                    <option value="zoom"
+                                                            th:selected="${event.onlinePlatform == 'zoom'}">Zoom
+                                                    </option>
+                                                    <option value="discord"
+                                                            th:selected="${event.onlinePlatform == 'discord'}">Discord
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-12 col-md-6">
+                                                <label class="form-label" for="onlineLink">Online Session Link</label>
+                                                <input name="onlineLink" type="text" class="form-control"
+                                                       id="onlineLink" th:value="${event.onlineLink}"
+                                                       placeholder="https://example.com" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="isTickerRequire"
+                                                   id="isTickerRequire"
+                                                   th:checked="${event.isTicketRequired()}" disabled>
+                                            <label class="form-check-label" for="isTickerRequire">Ticker Require</label>
+                                        </div>
+
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="isTicketAvailable"
+                                                   id="isTicketAvailable"
+                                                   th:checked="${event.isTicketAvailable()}" disabled>
+                                            <label class="form-check-label" for="isTicketAvailable">Ticket
+                                                Available</label>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        const isOnlineCheckbox = document.getElementById("isOnline");
+                                        const addressField = document.getElementById("addressField");
+                                        const onlineLinkField = document.getElementById("onlineLinkField");
+                                        if (isOnlineCheckbox.checked) {
+                                            addressField.classList.add("hide");
+                                            onlineLinkField.classList.remove("hide");
+                                        } else {
+                                            addressField.classList.remove("hide");
+                                            onlineLinkField.classList.add("hide");
+                                        }
+                                        isOnlineCheckbox.addEventListener("change", function () {
+                                            if (isOnlineCheckbox.checked) {
+                                                addressField.classList.add("hide");
+                                                onlineLinkField.classList.remove("hide");
+                                            } else {
+                                                addressField.classList.remove("hide");
+                                                onlineLinkField.classList.add("hide");
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </main>
+
+        <footer th:replace="admin/partials/footer"></footer>
+    </div>
+</div>
+<script>
+    let add_event_form = document.getElementById("add_event_form");
+    let membership_form_token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    let membership_form_header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+    add_event_form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // get fith url from the form
+        let url = add_event_form.getAttribute("action");
+
+        let formData = new FormData(add_event_form);
+        // check if the form is valid
+        if (!add_event_form.checkValidity() || formData.get("dateInterval") === "" || formData.get("timeFrom") === "" || formData.get("timeTo") === "") {
+            if (formData.get("dateInterval") === "") {
+                document.querySelector(".flatpickr-range").classList.add("is-invalid");
+            }
+            window.notyf.open({
+                type: "error",
+                message: "Please fill in all required fields.",
+                duration: 5000,
+                ripple: true,
+                dismissible: true,
+                position: {
+                    x: "left",
+                    y: "bottom"
+                }
+            });
+            return;
+        }
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                [membership_form_header]: membership_form_token
+            },
+            body: JSON.stringify({
+                title: formData.get("title"),
+                description: formData.get("description"),
+                dateInterval: formData.get("dateInterval"),
+                timeFrom: formData.get("timeFrom"),
+                timeTo: formData.get("timeTo"),
+                topics: formData.getAll("topics"), // Use getAll for multi-select
+                isOnline: !!formData.get("isOnline"),
+                location: formData.get("location"),
+                onlinePlatform: formData.get("onlinePlatform"),
+                onlineLink: formData.get("onlineLink"),
+                isTickerRequire: !!formData.get("isTickerRequire"),
+                isTicketAvailable: !!formData.get("isTicketAvailable"),
+            })
+        }).then(response => response.json())
+            .then(data => {
+                if (data.success === true) {
+                    window.notyf.open({
+                        type: "success",
+                        message: data.message,
+                        duration: 5000,
+                        ripple: true,
+                        dismissible: true,
+                        position: {
+                            x: "left",
+                            y: "bottom"
+                        }
+                    });
+
+                    setTimeout(() => {
+                        window.location.href = "/admin/events/list";
+                    }, 1000);
+
+                } else {
+                    window.notyf.open({
+                        type: "error",
+                        message: data.message,
+                        duration: 5000,
+                        ripple: true,
+                        dismissible: true,
+                        position: {
+                            x: "left",
+                            y: "bottom"
+                        }
+                    });
+                }
+            }).catch(error => {
+            window.notyf.open({
+                type: "error",
+                message: "An error occurred while Creating the Event",
+                duration: 5000,
+                ripple: true,
+                dismissible: true,
+                position: {
+                    x: "left",
+                    y: "bottom"
+                }
+            });
+        });
+    });
+</script>
+
+<script src="/admin/js/app.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Choices.js
+        new Choices(document.querySelector(".choices-single"));
+        new Choices(document.querySelector(".choices-multiple"));
+        // Flatpickr
+        flatpickr(".flatpickr-minimum");
+        flatpickr(".flatpickr-datetime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            altInput: true,
+        });
+        flatpickr(".flatpickr-human", {
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+        flatpickr(".flatpickr-multiple", {
+            mode: "multiple",
+            dateFormat: "Y-m-d"
+        });
+        flatpickr(".flatpickr-range", {
+            mode: "range",
+            dateFormat: "Y-m-d"
+        });
+        flatpickr(".flatpickr-time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+        });
+    });
+</script>
+
+</body>
+
+</html>

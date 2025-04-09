@@ -146,7 +146,8 @@ public class User implements UserDetails {
         VIEW_ADMIN_MEMBERS,
         VIEW_ADMIN_EVENTS,
         VIEW_SUBSCRIBED_EMAILS,
-        EDITE_SUBSCRIBED_EMAILS;
+        EDITE_SUBSCRIBED_EMAILS,
+        EDITE_EVENTS;
 
 
         public String getAuthorityName() {

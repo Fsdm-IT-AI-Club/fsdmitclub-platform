@@ -17,16 +17,16 @@
 package com.fsdm.it.fsdm_it_club.entity;
 
 import com.fsdm.it.fsdm_it_club.converters.ListStringToStringConverter;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.security.PublicKey;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Entity
@@ -45,19 +45,15 @@ public class Event {
     private String description;
     private String location;
 
-
-    private LocalDate startDate;
-    private LocalDate endDate;
-
-
-
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private ZonedDateTime startDateTime;
+    private ZonedDateTime endDateTime;
 
     private String image;
     private String category;
     private String status;
-    private String type;
+
+    @Enumerated(EnumType.STRING)
+    private EventType type;
 
     private boolean isFeatured;
     private boolean isPublished;
@@ -65,6 +61,11 @@ public class Event {
 
     private String onlinePlatform;
     private String onlineLink;
+
+    @Column(nullable = false)
+    private boolean isTicketRequired = false;
+    @Column(nullable = false)
+    private boolean isTicketAvailable = false;
 
     private int views;
 
@@ -75,10 +76,33 @@ public class Event {
     private List<String> keyWords;
 
     public boolean isPast() {
-        if (this.endDate == null) {
-            return this.startDate.isBefore(LocalDate.now()) || (this.startDate.isEqual(LocalDate.now()) && this.startTime.compareTo(LocalTime.now()) < 0);
+        if (endDateTime != null) {
+            return endDateTime.isBefore(ZonedDateTime.now());
+        } else {
+            return startDateTime.isBefore(ZonedDateTime.now());
         }
-        return this.endDate.isBefore(LocalDate.now()) || (this.endDate.isEqual(LocalDate.now()) && this.endTime.compareTo(LocalTime.now()) < 0);
+    }
+
+    public enum EventType {
+        WORKSHOP("Workshop"),
+        TRAINING("Training"),
+        SEMINAR("Seminar"),
+        WEBINAR("Webinar"),
+        MEETUP("Meetup"),
+        CONFERENCE("Conference"),
+        HACKATHON("Hackathon"),
+        COMPETITION("Competition"),
+        OTHER("Other");
+
+        private final String type;
+
+        EventType(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
     }
 
 }

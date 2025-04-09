@@ -23,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
@@ -31,5 +32,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Page<Event> findByTitleContainingOrderByIdAsc(String title, Pageable pageable);
     Page<Event> findByTitleContainingOrderByIdDesc(String title, Pageable pageable);
 
-    List<Event> findByStartDateIsAfterOrderByStartDateAsc(LocalDate startDate);
+    List<Event> findByStartDateTimeIsAfterOrderByStartDateTimeAsc(ZonedDateTime startDate);
+
+    List<Event> findByStartDateTimeIsAfterOrderByStartDateTimeAsc(ZonedDateTime now, Pageable pageable);
 }

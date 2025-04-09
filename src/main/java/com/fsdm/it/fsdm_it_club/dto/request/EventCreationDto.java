@@ -16,6 +16,7 @@
 
 package com.fsdm.it.fsdm_it_club.dto.request;
 
+import com.fsdm.it.fsdm_it_club.entity.Event;
 import lombok.Builder;
 
 import java.time.LocalDate;
@@ -33,7 +34,11 @@ public record EventCreationDto(
         Boolean isOnline,      // Online or offline event
         String location,        // Event location (if offline)
         String onlinePlatform, // Online platform (if online)
-        String onlineLink      // URL for the online session
+        String onlineLink,     // URL for the online session
+        boolean isTickerRequire,
+        boolean isTicketAvailable,
+        String image,          // Image URL
+        Event.EventType type
 ) {
 
     public String title() {
@@ -55,7 +60,7 @@ public record EventCreationDto(
     public LocalDate endDate() {
         String dateTrimmed = dateInterval.trim();
         if (!dateTrimmed.matches("\\d{4}-\\d{2}-\\d{2} to \\d{4}-\\d{2}-\\d{2}")) {
-            return null;
+            return startDate();
         }
 
         String[] dates = dateTrimmed.split(" to ");

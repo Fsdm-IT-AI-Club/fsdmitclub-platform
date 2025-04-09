@@ -105,7 +105,6 @@
     <style>
 
 
-
         .partners-section {
             padding: 60px 0;
         }
@@ -162,11 +161,6 @@
                 margin: 0 auto; /* Align logos horizontally */
             }
         }
-
-
-
-
-
 
 
         .container-sub {
@@ -270,9 +264,9 @@
 
 <main>
 
-    <nav class="navbar navbar-expand-lg" th:replace="home/partials/nav"></nav>
+    <nav class="navbar navbar-expand-lg" th:replace="~{home/partials/nav}"></nav>
 
-    <div th:replace="home/partials/login" class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1"
+    <div th:replace="~{home/partials/login}" class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1"
          id="loginSlideBar"
          aria-labelledby="loginSlideBarLabel" style="padding-top: 0">
     </div>
@@ -521,7 +515,8 @@
 
                             <ul class="social-icon">
                                 <li class="social-icon-item">
-                                    <a href="https://www.linkedin.com/in/j216942155/" class="social-icon-link bi-linkedin"></a>
+                                    <a href="https://www.linkedin.com/in/j216942155/"
+                                       class="social-icon-link bi-linkedin"></a>
                                 </li>
 
                             </ul>
@@ -543,7 +538,8 @@
 
                             <ul class="social-icon">
                                 <li class="social-icon-item">
-                                    <a href="https://www.linkedin.com/in/ali-yahyaouy-0940221a5/" class="social-icon-link bi-linkedin" ></a>
+                                    <a href="https://www.linkedin.com/in/ali-yahyaouy-0940221a5/"
+                                       class="social-icon-link bi-linkedin"></a>
                                 </li>
 
                             </ul>
@@ -627,20 +623,23 @@
                     <h2 class="mb-lg-3">Upcoming Events</h2>
                 </div>
 
-                <div class="row custom-block custom-block-bg">
+
+                <div th:each="upComingEvent, iterStat :${upComingEvents}" th:id="@{row-+${upComingEvent.id}}"
+
+                     th:class="${iterStat.index % 2 != 0 ? 'row custom-block mb-3' : 'row custom-block custom-block-bg'}">
                     <div class="col-lg-2 col-md-4 col-12 order-2 order-md-0 order-lg-0">
                         <div class="custom-block-date-wrap d-flex d-lg-block d-md-block align-items-center mt-3 mt-lg-0 mt-md-0">
-                            <h6 class="custom-block-date mb-lg-1 mb-0 me-3 me-lg-0 me-md-0">22</h6>
-
-                            <strong class="text-white">Mar 2025</strong>
+                            <h6 class="custom-block-date mb-lg-1 mb-0 me-3 me-lg-0 me-md-0"
+                                th:text="${upComingEvent.startDay()}"></h6>
+                            <strong class="text-white"
+                                    th:text="${upComingEvent.startDate()}"></strong>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-8 col-12 order-1 order-lg-0">
                         <div class="custom-block-image-wrap">
-                            <a href="event-details">
-                                <img src="home/images/python.png" class="custom-block-image img-fluid" alt="" loading="lazy">
-
+                            <a th:href="@{'/event/detail/' + ${upComingEvent.id}}">
+                                <img th:src="${upComingEvent.image()}" class="custom-block-image img-fluid" alt="">
                                 <i class="custom-block-icon bi-link"></i>
                             </a>
                         </div>
@@ -648,36 +647,50 @@
 
                     <div class="col-lg-6 col-12 order-3 order-lg-0">
                         <div class="custom-block-info mt-2 mt-lg-0">
-                            <a href="event-details" class="events-title mb-3">Python Programming Course 🐍
-                            </a>
-
-                            <p class="mb-0">Are you new to Python or looking to solidify your foundation? This course is designed for both beginners and those who want to enhance their skills through hands-on practice. Join us for an interactive session where you'll explore key programming concepts and improve your problem-solving abilities.
-                            </p>
+                            <a th:href="@{'/event/detail/' + ${upComingEvent.id}}" class="events-title mb-3"
+                               th:text="${upComingEvent.title}"></a>
+                            <p class="mb-0" th:text="${upComingEvent.description}"></p>
 
                             <div class="d-flex flex-wrap border-top mt-4 pt-3">
-
                                 <div class="mb-4 mb-lg-0">
                                     <div class="d-flex flex-wrap align-items-center mb-1">
-                                        <span class="custom-block-span">Location:</span>
+                                        <span class="custom-block-span"
+                                              th:if="${upComingEvent.isOnline()}">Online Link:</span>
+                                        <span class="custom-block-span"
+                                              th:if="${!upComingEvent.isOnline()}">Location:</span>
 
-                                        <p class="mb-0">FSDM Computer Science Department, I114 (MLAIM)
+                                        <p class="mb-0" th:if="${upComingEvent.isOnline()}">
+                                            <a th:href="${upComingEvent.onlineLink()}"
+                                               th:text="${#strings.capitalize(upComingEvent.onlinePlatform())}"></a>
                                         </p>
+                                        <p class="mb-0" th:if="${!upComingEvent.isOnline()}"
+                                           th:text="${upComingEvent.location()}"></p>
+
                                     </div>
 
                                     <div class="d-flex flex-wrap align-items-center">
                                         <span class="custom-block-span">Ticket:</span>
-
-                                        <p class="mb-0">Available</p>
+                                        <p class="mb-0"
+                                           th:text="${upComingEvent.isTicketRequired ? 'Required' : 'Not Required'}"></p>
                                     </div>
                                 </div>
 
                                 <div class="d-flex align-items-center ms-lg-auto">
-                                    <a href="event-details" class="btn custom-btn">Details</a>
+                                    <a th:if="${upComingEvent.ticketAvailable}"
+                                       th:href="@{/event/get-ticket/{id}(id=${upComingEvent.id})}"
+                                       class="btn custom-btn">Get Ticket</a>
+
+                                    <a th:if="${!upComingEvent.ticketAvailable}"
+                                       class="btn custom-btn disabled"
+                                       href="javascript:void(0)">Not Available</a>
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
             </div>
         </div>

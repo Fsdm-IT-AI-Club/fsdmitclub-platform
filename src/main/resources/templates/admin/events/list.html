@@ -151,7 +151,7 @@
             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
         </svg>
     </a>
-    <a onclick="deleteEvent(${row.id})" class="text-danger me-2">
+    <a onclick="deleteRecord(${row.id})" class="text-danger me-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
              class="feather feather-trash align-middle">
@@ -159,7 +159,7 @@
             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
         </svg>
     </a>
-    <a href="/admin/events/show/${row.id}">
+    <a href="/admin/events/view/${row.id}">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
              class="feather feather-eye align-middle">
@@ -203,9 +203,9 @@
 
 <script>
     function deleteRecord(record) {
-        if (confirm("Are you sure you want to delete this record?")) {
-            fetch("/admin/newsletter/delete/" + record, {
-                method: "delete",
+        if (confirm("Are you sure you want to delete this Event?")) {
+            fetch("/admin/events/delete/" + record, {
+                method: "get",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": document.querySelector('meta[name="_csrf"]').content
@@ -214,7 +214,7 @@
                 if (response.ok) {
                     window.notyf.open({
                         type: "success",
-                        message: "Email deleted successfully",
+                        message: "Event deleted successfully",
                         duration: 5000,
                         ripple: true,
                         dismissible: true,
@@ -242,85 +242,9 @@
 
     }
 
-    function unsubscribe(record) {
-        if (confirm("Are you sure you want to unsubscribe this record?")) {
-            fetch("/admin/newsletter/unsubscribe/" + record, {
-                method: "put",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="_csrf"]').content
-                }
-            }).then(response => {
-                if (response.ok) {
-                    window.notyf.open({
-                        type: "success",
-                        message: "Email unsubscribed successfully",
-                        duration: 5000,
-                        ripple: true,
-                        dismissible: true,
-                        position: {
-                            x: "left",
-                            y: "bottom"
-                        }
-                    });
-                    $("#datatables-buttons").DataTable().ajax.reload();
-                } else {
-                    window.notyf.open({
-                        type: "error",
-                        message: "An error occurred while unsubscribing the record",
-                        duration: 5000,
-                        ripple: true,
-                        dismissible: true,
-                        position: {
-                            x: "left",
-                            y: "bottom"
-                        }
-                    });
-                }
-            });
-        }
 
-    }
 
-    function subscribe(record) {
-        if (confirm("Are you sure you want to subscribe this record?")) {
-            fetch("/admin/newsletter/subscribe/" + record, {
-                method: "put",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="_csrf"]').content
-                }
-            }).then(response => {
-                if (response.ok) {
-                    window.notyf.open({
-                        type: "success",
-                        message: "Email subscribed successfully",
-                        duration: 5000,
-                        ripple: true,
-                        dismissible: true,
-                        position: {
-                            x: "left",
-                            y: "bottom"
-                        }
-                    });
-                    $("#datatables-buttons").DataTable().ajax.reload();
-                } else {
-                    window.notyf.open({
-                        type: "error",
-                        message: "An error occurred while subscribing the record",
-                        duration: 5000,
-                        ripple: true,
-                        dismissible: true,
-                        position: {
-                            x: "left",
-                            y: "bottom"
-                        }
-                    });
-                }
-            });
-        }
 
-    }
 </script>
 </body>
 

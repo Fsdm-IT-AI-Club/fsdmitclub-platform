@@ -21,12 +21,17 @@ import com.fsdm.it.fsdm_it_club.entity.Event;
 import com.fsdm.it.fsdm_it_club.model.TableSortOrder;
 import com.fsdm.it.fsdm_it_club.model.enums.SortOrder;
 import com.fsdm.it.fsdm_it_club.repository.EventRepository;
+import com.fsdm.it.fsdm_it_club.util.Constants;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventService {
@@ -63,15 +68,20 @@ public class EventService {
         return eventRepository.findAll(pageable);
     }
 
-    public Event findById(Long id) {
-        return eventRepository.findById(id).orElse(null);
+    public Optional<Event> findById(Long id) {
+        return eventRepository.findById(id);
     }
 
     public void deleteById(Long id) {
         eventRepository.deleteById(id);
     }
 
-    public List<Event> getEventsFromStartDate(LocalDate startDate) {
-        return eventRepository.findByStartDateIsAfterOrderByStartDateAsc(startDate);
+    public List<Event> getEventsFromStartDate(ZonedDateTime startDate) {
+        return eventRepository.findByStartDateTimeIsAfterOrderByStartDateTimeAsc(startDate);
     }
+
+    public List<Event> getUpComingEvents(int number) {
+        return eventRepository.findByStartDateTimeIsAfterOrderByStartDateTimeAsc(ZonedDateTime.now(ZoneId.of(Constants.DEFAULT_TIME_ZONE)), PageRequest.of(0, number));
+    }
+
 }

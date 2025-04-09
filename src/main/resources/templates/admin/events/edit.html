@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="admin/partials/head :: head(title = 'Dashboard')"></head>
+<head th:replace="admin/partials/head :: head(title = 'Dashboard | Event Edit')"></head>
 
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
 <div class="wrapper">
-    <nav th:replace="admin/partials/sidebar :: sidebar(href='/admin/events/add')"></nav>
+    <nav th:replace="admin/partials/sidebar :: sidebar(href='/admin/events/')"></nav>
 
     <div class="main">
         <nav th:replace="admin/partials/navbar"></nav>
@@ -15,7 +15,7 @@
             <div class="container-fluid p-0">
 
                 <div class="mb-3">
-                    <h1 class="h3 d-inline align-middle">Add new Event</h1></a>
+                    <h1 class="h3 d-inline align-middle">Edit Event</h1></a>
                 </div>
 
                 <div class="row">
@@ -25,21 +25,23 @@
                         <div class="card">
                             <div class="card-header">
 
-                                <h6 class="card-subtitle text-muted">provide Event Details.</h6>
+                                <h6 class="card-subtitle text-muted">provide New Event Details.</h6>
                             </div>
                             <div class="card-body">
-                                <form action="/admin/events/add" method="post" id="add_event_form">
+                                <form th:action="@{'/admin/events/edit/'+${event.id}}" method="post"
+                                      id="add_event_form">
                                     <div class="row">
                                         <div class="mb-12 col-md-6">
                                             <label class="form-label" for="title_rorm">Title</label>
                                             <input type="text" class="form-control" id="title_rorm" name="title"
+                                                   th:value="${event.title}"
                                                    placeholder="" required>
                                         </div>
                                         <div class="mb-12 col-md-6">
                                             <label class="form-label">Date Interval</label>
                                             <input type="text" name="dateInterval"
                                                    class="form-control flatpickr-range flatpickr-input active"
-                                                   placeholder="Select date.." readonly="readonly" required>
+                                                   placeholder="Select date.." readonly="readonly" th:value="${formattedDateInterval}" required>
                                         </div>
                                     </div>
 
@@ -49,13 +51,15 @@
                                             <label class="form-label">From</label>
                                             <input type="text" name="timeFrom"
                                                    class="form-control flatpickr-time flatpickr-input"
-                                                   placeholder="Select date.." readonly="readonly" required>
+                                                   placeholder="Select date.." readonly="readonly" required
+                                                   th:value="${formattedStartTime}">
                                         </div>
                                         <div class="mb-12 col-md-6">
                                             <label class="form-label">to</label>
                                             <input type="text" name="timeTo"
                                                    class="form-control flatpickr-time flatpickr-input"
-                                                   placeholder="Select date.." readonly="readonly" required>
+                                                   placeholder="Select date.." readonly="readonly" required
+                                                   th:value="${formattedEndTime}">
                                         </div>
                                     </div>
 
@@ -63,6 +67,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="inputAddress">Description</label>
                                         <textarea class="form-control" name="description" id="description_form" rows="4"
+                                                  th:value="${event.description}" th:text="${event.description}"
                                                   placeholder="" required></textarea>
                                     </div>
 
@@ -72,26 +77,56 @@
                                             <select name="topics" id="topics" class="form-control choices-multiple"
                                                     multiple="">
                                                 <optgroup label="Sciences">
-                                                    <option value="It">It</option>
-                                                    <option value="Web Development">Web Development</option>
-
-                                                    <option value="Security">Security</option>
-                                                    <option value="AI">AI</option>
-                                                    <option value="Technology">Technology</option>
-                                                    <option value="IoT">IoT</option>
-
-                                                    <option value="Robotics">Robotics</option>
-                                                    <option value="Problem Solving">Problem Solving</option>
-                                                    <option value="Mobile Development">Mobile Development</option>
-                                                    <option value="DevOps">DevOps</option>
-                                                    <option value="Networking">Networking</option>
-                                                    <option value="Computer Vision">Computer Vision</option>
-                                                    <option value="Data Sciences">Data Sciences</option>
-                                                    <option value="Mathematics">Mathematics</option>
+                                                    <option value="It" th:selected="${event.topics.contains('It')}">It
+                                                    </option>
+                                                    <option value="Web Development"
+                                                            th:selected="${event.topics.contains('Web Development')}">
+                                                        Web Development
+                                                    </option>
+                                                    <option value="Security"
+                                                            th:selected="${event.topics.contains('Security')}">Security
+                                                    </option>
+                                                    <option value="AI" th:selected="${event.topics.contains('AI')}">AI
+                                                    </option>
+                                                    <option value="Technology"
+                                                            th:selected="${event.topics.contains('Technology')}">
+                                                        Technology
+                                                    </option>
+                                                    <option value="IoT" th:selected="${event.topics.contains('IoT')}">
+                                                        IoT
+                                                    </option>
+                                                    <option value="Robotics"
+                                                            th:selected="${event.topics.contains('Robotics')}">Robotics
+                                                    </option>
+                                                    <option value="Problem Solving"
+                                                            th:selected="${event.topics.contains('Problem Solving')}">
+                                                        Problem Solving
+                                                    </option>
+                                                    <option value="Mobile Development"
+                                                            th:selected="${event.topics.contains('Mobile Development')}">
+                                                        Mobile Development
+                                                    </option>
+                                                    <option value="DevOps"
+                                                            th:selected="${event.topics.contains('DevOps')}">DevOps
+                                                    </option>
+                                                    <option value="Networking"
+                                                            th:selected="${event.topics.contains('Networking')}">
+                                                        Networking
+                                                    </option>
+                                                    <option value="Computer Vision"
+                                                            th:selected="${event.topics.contains('Computer Vision')}">
+                                                        Computer Vision
+                                                    </option>
+                                                    <option value="Data Sciences"
+                                                            th:selected="${event.topics.contains('Data Sciences')}">Data
+                                                        Sciences
+                                                    </option>
+                                                    <option value="Mathematics"
+                                                            th:selected="${event.topics.contains('Mathematics')}">
+                                                        Mathematics
+                                                    </option>
                                                 </optgroup>
-
-                                            </select>
-                                        </div>
+                                            </select></div>
                                     </div>
 
 
@@ -99,23 +134,25 @@
                                         <label class="form-label" for="topics">Type</label>
                                         <select class="form-control choices-single" name="type" id="type" required>
                                             <optgroup label="Alaskan/Hawaiian Time Zone">
-                                                <option th:each="eventType :${eventTypes}"
+                                                <option th:each="eventType : ${eventTypes}"
                                                         th:value="${eventType}"
-                                                        th:text="${#strings.capitalize(#strings.toLowerCase(eventType))}"></option>
+                                                        th:text="${#strings.capitalize(#strings.toLowerCase(eventType))}"
+                                                        th:selected="${eventType == event.type}"></option>
                                             </optgroup>
 
                                         </select>
                                     </div>
 
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="isOnline" id="isOnline">
+                                        <input class="form-check-input" type="checkbox" name="isOnline" id="isOnline"
+                                               th:checked="${event.isOnline}">
                                         <label class="form-check-label" for="isOnline">Online Event</label>
                                     </div>
 
                                     <div id="addressField">
                                         <label class="form-label" for="inputAddress">Location</label>
                                         <input name="location" type="text" class="form-control" id="inputAddress"
-                                               placeholder="Dhar El Mahrez ....">
+                                               th:value="${event.location}" placeholder="Dhar El Mahrez ....">
                                     </div>
 
                                     <div class="row hide" id="onlineLinkField">
@@ -123,16 +160,23 @@
                                         <div class="mb-12 col-md-6">
                                             <label class="form-label">Where</label>
                                             <select name="onlinePlatform" class="form-select">
-                                                <option value="google_meet">Google Meed</option>
-                                                <option value="zoom">Zoom</option>
-                                                <option value="discord">Discord</option>
+                                                <option value="google_meet"
+                                                        th:selected="${event.onlinePlatform == 'google_meet'}">Google
+                                                    Meet
+                                                </option>
+                                                <option value="zoom" th:selected="${event.onlinePlatform == 'zoom'}">
+                                                    Zoom
+                                                </option>
+                                                <option value="discord"
+                                                        th:selected="${event.onlinePlatform == 'discord'}">Discord
+                                                </option>
                                             </select>
                                         </div>
 
 
                                         <div class="mb-12 col-md-6">
                                             <label class="form-label" for="onlineLink">Online Session Link</label>
-                                            <input name="onlineLink" type="text" class="form-control" id="onlineLink"
+                                            <input name="onlineLink" type="text" class="form-control" id="onlineLink" th:value="${event.onlineLink}"
                                                    placeholder="https://example.com">
                                         </div>
                                     </div>
@@ -140,13 +184,13 @@
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" name="isTickerRequire"
-                                               id="isTickerRequire">
+                                               id="isTickerRequire" th:checked="${event.isTicketRequired()}">
                                         <label class="form-check-label" for="isTickerRequire">Ticker Require</label>
                                     </div>
 
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" name="isTicketAvailable"
-                                               id="isTicketAvailable">
+                                               id="isTicketAvailable" th:checked="${event.isTicketAvailable()}">
                                         <label class="form-check-label" for="isTicketAvailable">Ticket Available</label>
                                     </div>
 
@@ -158,7 +202,13 @@
                                         const isOnlineCheckbox = document.getElementById("isOnline");
                                         const addressField = document.getElementById("addressField");
                                         const onlineLinkField = document.getElementById("onlineLinkField");
-
+                                        if (isOnlineCheckbox.checked) {
+                                            addressField.classList.add("hide");
+                                            onlineLinkField.classList.remove("hide");
+                                        } else {
+                                            addressField.classList.remove("hide");
+                                            onlineLinkField.classList.add("hide");
+                                        }
                                         isOnlineCheckbox.addEventListener("change", function () {
                                             if (isOnlineCheckbox.checked) {
                                                 addressField.classList.add("hide");
@@ -191,6 +241,9 @@
     add_event_form.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        // get fith url from the form
+        let url = add_event_form.getAttribute("action");
+
         let formData = new FormData(add_event_form);
         // check if the form is valid
         if (!add_event_form.checkValidity() || formData.get("dateInterval") === "" || formData.get("timeFrom") === "" || formData.get("timeTo") === "") {
@@ -211,7 +264,7 @@
             return;
         }
 
-        fetch("/admin/events/add", {
+        fetch(url, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -230,7 +283,6 @@
                 onlineLink: formData.get("onlineLink"),
                 isTickerRequire: !!formData.get("isTickerRequire"),
                 isTicketAvailable: !!formData.get("isTicketAvailable"),
-                type: formData.get("type"),
             })
         }).then(response => response.json())
             .then(data => {
@@ -247,11 +299,9 @@
                         }
                     });
 
-                    add_event_form.reset();
-
                     setTimeout(() => {
                         window.location.href = "/admin/events/list";
-                    }, 2000);
+                    }, 1000);
 
                 } else {
                     window.notyf.open({
@@ -287,13 +337,14 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Choices.js
-         new Choices(document.querySelector(".choices-single"));
+        new Choices(document.querySelector(".choices-single"));
         new Choices(document.querySelector(".choices-multiple"));
         // Flatpickr
         flatpickr(".flatpickr-minimum");
         flatpickr(".flatpickr-datetime", {
             enableTime: true,
             dateFormat: "Y-m-d H:i",
+            altInput: true,
         });
         flatpickr(".flatpickr-human", {
             altInput: true,
@@ -312,6 +363,7 @@
             enableTime: true,
             noCalendar: true,
             dateFormat: "H:i",
+            time_24hr: true,
         });
     });
 </script>
