@@ -215,14 +215,20 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            background: #F2CC8F;
+            background: linear-gradient(135deg, #F2CC8F, #E8B475);
             color: #FFFFFF;
-            transition: width .35s ease-in-out, background .35s ease-in-out;
+            transition: all .35s ease-in-out;
+            box-shadow: 0 4px 12px rgba(242, 204, 143, 0.4);
+        }
+
+        .subscription .submit-email:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(242, 204, 143, 0.5);
         }
 
         .subscription.done .submit-email {
             width: calc(100% - 10px);
-            background: #E07A5F;
+            background: linear-gradient(135deg, #E07A5F, #D66A4F);
         }
 
         .subscription .submit-email .before-submit,

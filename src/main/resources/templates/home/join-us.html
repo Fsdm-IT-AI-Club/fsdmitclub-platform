@@ -90,12 +90,26 @@
             font-weight: 700;
             margin-top: 40px;
             text-transform: capitalize;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #F2CC8F, #E07A5F);
+            border-radius: 2px;
         }
 
         .section-description {
             font-size: 1.1rem;
             color: #717275;
-            line-height: 1.6;
+            line-height: 1.8;
             max-width: 700px;
             margin: 0 auto 40px auto;
         }
@@ -103,52 +117,91 @@
         /* Form Card */
         .form-card {
             border: none;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s ease-in-out;
+            background: #ffffff;
+        }
+
+        .form-card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
         }
 
         /* Form Elements */
         .form-label {
             font-weight: 600;
             color: #333333;
+            margin-bottom: 8px;
+            font-size: 15px;
         }
 
         .form-control,
         .form-select {
             height: calc(2.5rem + 2px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 10px 15px;
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            padding: 12px 16px;
             font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease-in-out;
+            background: #fafafa;
         }
 
         .form-control:focus,
         .form-select:focus {
-            border-color: #F2CC8F; /* Border color matching the theme */
+            border-color: #F2CC8F;
             outline: none;
-            box-shadow: 0 0 8px rgba(242, 204, 143, 0.4); /* Matching glow effect */
+            box-shadow: 0 4px 16px rgba(242, 204, 143, 0.3);
+            background: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .form-control:hover,
+        .form-select:hover {
+            border-color: rgba(242, 204, 143, 0.5);
         }
 
         /* Submit Button */
         .btn-gradient {
-            background:  rgb(49, 75, 157);
+            background: linear-gradient(135deg, rgb(49, 75, 157), #5a67d8);
             color: #ffffff;
             font-size: 1rem;
             font-weight: bold;
             text-transform: uppercase;
-            padding: 12px 20px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(242, 204, 143, 0.4);
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 6px 16px rgba(49, 75, 157, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-gradient:hover::before {
+            left: 100%;
         }
 
         .btn-gradient:hover {
             background: linear-gradient(135deg, #5a67d8, rgb(49, 75, 157));
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(242, 204, 143, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(49, 75, 157, 0.4);
+        }
+
+        .btn-gradient:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(49, 75, 157, 0.3);
         }
 
         /* Responsiveness */
